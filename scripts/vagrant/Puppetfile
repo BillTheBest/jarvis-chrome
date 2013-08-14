@@ -1,0 +1,10 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'postgresql',
+    :git => 'git://github.com/puppetlabs/puppet-postgresql.git'
+
+mod 'supervisor',
+    :git => 'git://github.com/mhahn/puppet-module-supervisor.git'
+
+mod 'rabbitmq',
+    :git => 'git://github.com/puppetlabs/puppetlabs-rabbitmq.git'
