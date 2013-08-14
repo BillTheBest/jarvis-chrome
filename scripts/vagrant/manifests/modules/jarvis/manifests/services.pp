@@ -41,7 +41,7 @@ class jarvis::services {
       ensure  => directory,
       mode    => '0644',
       recurse => true,
-      source  => "puppet:///jarvis/etc/nginx/";
+      source  => "puppet:///modules/jarvis/etc/nginx/";
 
     '/etc/nginx/sites-enabled/default':
       ensure  => absent,

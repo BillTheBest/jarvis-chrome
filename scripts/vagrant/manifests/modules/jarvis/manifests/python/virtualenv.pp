@@ -37,7 +37,7 @@ class jarvis::python::virtualenv {
       ensure  => file,
       owner   => vagrant,
       group   => vagrant,
-      source  => 'puppet:///jarvis/home/vagrant/bash_profile.sh',
+      source  => 'puppet:///modules/jarvis/home/vagrant/bash_profile.sh',
       require => Exec['virtualenv-create'];
   }
 

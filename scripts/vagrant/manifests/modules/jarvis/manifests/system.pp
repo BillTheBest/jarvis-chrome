@@ -2,7 +2,7 @@ class jarvis::system {
 
   file {
     '/etc/rsyslog.conf':
-      source => 'puppet:///jarvis/etc/rsyslog.conf',
+      source => 'puppet:///modules/jarvis/etc/rsyslog.conf',
       notify => Exec['restart-rsyslogd'],
       mode   => 0644,
       owner  => root,
@@ -13,7 +13,7 @@ class jarvis::system {
       owner  => root,
       group  => root;
     '/etc/rsyslog.d/50-default.conf':
-      source => 'puppet:///jarvis/etc/rsyslog.d/50-default.conf',
+      source => 'puppet:///modules/jarvis/etc/rsyslog.d/50-default.conf',
       notify => Exec['restart-rsyslogd'],
       mode   => 0644,
       owner  => root,

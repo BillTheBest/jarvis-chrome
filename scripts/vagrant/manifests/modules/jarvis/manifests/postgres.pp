@@ -37,7 +37,7 @@ class jarvis::postgres {
   file { $pg_conf_include_file:
     ensure => present,
     audit  => all,
-    source => 'puppet:///jarvis/etc/postgresql/postgresql.conf',
+    source => 'puppet:///modules/jarvis/etc/postgresql/postgresql.conf',
     notify => Exec['reload_postgresql'],
   }
 
