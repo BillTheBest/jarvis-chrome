@@ -1,0 +1,3 @@
+[submodule "src/chrome/lib/js/vendor/gmailr"]
+	path = src/chrome/lib/js/vendor/gmailr
+	url = git@github.com:mwildehahn/gmailr.git
