@@ -33,3 +33,8 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# Vagrant
+scripts/vagrant/modules
+scripts/vagrant/.tmp
+scripts/vagrant/.vagrant
