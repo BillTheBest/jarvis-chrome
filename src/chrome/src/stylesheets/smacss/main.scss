@@ -1,0 +1,34 @@
+@import 'bourbon/bourbon';
+
+.Ug {
+    white-space: nowrap;
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    display: inline-block;
+    font: normal 13px/1.4 Roboto,arial,sans-serif;
+    margin: 0 1px;
+    padding: 0 1px;
+    vertical-align: baseline;
+    color: #427fed;
+}
+
+.tag-bar .ui-widget-content {
+    border: none;
+    margin: 0 5px 0 0;
+}
+
+.tag-bar .ui-widget input,
+.tag-bar .ui-widget select,
+.tag-bar .ui-widget textarea,
+.tag-bar .ui-widget button {
+    font-family: arial,sans-serif;
+    font-size: 13px;
+    color: #222;
+    margin: 0;
+    outline: none;
+    padding: 4px 1px 4px 2px;
+    resize: none;
+    @include box-sizing(border-box);
+    width: 100%;
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Jarvis Dev",
+  "version": "1.0",
+  "description": "Jarvis test.",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "lib/js/vendor/gmailr/chrome/lib/yepnope.js/yepnope.1.5.4-min.js",
+        "src/js/bootstrap.js"
+      ],
+      "css": [
+        "lib/stylesheets/smacss/main.css",
+        "lib/js/bower_components/tag-it/css/jquery.tagit.css",
+        "lib/js/bower_components/jquery-ui/themes/flick/jquery-ui.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/js/bower_components/jquery/jquery.min.js",
+    "lib/js/bower_components/underscore/underscore-min.js",
+    "lib/js/bower_components/backbone/backbone-min.js",
+    "lib/js/bower_components/jquery-ui/ui/minified/jquery-ui.min.js",
+    "lib/js/bower_components/tag-it/js/tag-it.min.js",
+    "lib/js/bower_components/backbone.localStorage/backbone.localStorage-min.js",
+    "lib/js/vendor/gmailr/chrome/lib/gmailr.js",
+    "lib/js/vendor/gmailr/chrome/lib/jquery-bbq/jquery.ba-bbq.min.js",
+    "lib/js/vendor/gmailui/lib/GMailUI.js",
+    "src/js/jarvis.js",
+    "src/js/composer.js",
+    "src/js/watcher.js",
+    "src/js/models/tag.js",
+    "src/js/collections/tags.js",
+    "src/js/views/compose.js",
+    "src/js/views/tagbar.js",
+    "src/js/routers/router.js",
+    "src/js/main.js"
+  ],
+  "manifest_version": 2,
+  "permissions": [
+    "*://mail.google.com/*",
+    "*://www.jdev.com/*"
+  ]
+}
