@@ -1,6 +1,8 @@
 if (top.document === document) {
     // this is required by gmailr to ensure that we operate on the correct window instance
     yepnope([
+        chrome.extension.getURL("lib/js/bower_components/requirejs/require.js"),
+        chrome.extension.getURL("lib/js/bower_components/requirejs-text/text.js"),
         chrome.extension.getURL("lib/js/bower_components/jquery/jquery.min.js"),
         chrome.extension.getURL("lib/js/bower_components/underscore/underscore-min.js"),
         chrome.extension.getURL("lib/js/bower_components/backbone/backbone.js"),

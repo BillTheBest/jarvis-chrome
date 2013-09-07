@@ -20,6 +20,8 @@
     }
   ],
   "web_accessible_resources": [
+    "lib/js/bower_components/requirejs/require.js",
+    "lib/js/bower_components/requirejs-text/text.js",
     "lib/js/bower_components/jquery/jquery.min.js",
     "lib/js/bower_components/underscore/underscore-min.js",
     "lib/js/bower_components/backbone/backbone.js",

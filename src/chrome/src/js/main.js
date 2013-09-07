@@ -1,4 +1,11 @@
-(function($, Jarvis, _, Backbone, Gmailr) {
+define([
+    'jquery',
+    'jarvis',
+    'underscore',
+    'backbone',
+    'gmailr',
+    'router',
+], function($, Jarvis, _, Backbone, Gmailr) {
 
     'use strict';
 
@@ -44,4 +51,4 @@
     Jarvis.Routers.Main = new Jarvis.Routers.Workspace();
     Backbone.history.start();
 
-})(window.jQuery, window.Jarvis, window._, window.Backbone, window.Gmailr);
+});
