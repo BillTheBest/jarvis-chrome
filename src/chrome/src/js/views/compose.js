@@ -31,6 +31,7 @@
 
             this.$compose_id = options.$compose_id;
             this.$compose = $(this._findElByComposeId());
+
             J.debug('initializing compose view for:', this.$compose_id.val());
 
             this.$form = this.$compose.find('form');
@@ -39,30 +40,34 @@
             this.$subjectContainer = this.$form.find('input[name="subjectbox"]');
             this.$body = this.$compose.find('.editable');
 
+            var draftId = this.$draft_id.val();
+            if (draftId !== 'undefined') {
+                draftId = parseInt(draftId, 16);
+            } else {
+                draftId = null;
+            }
+
+            this.draft = new J.Models.DraftModel({
+                user: J.user_id,
+                draft_id: draftId,
+            }, {
+                $compose_id: this.$compose_id,
+                $draft_id: this.$draft_id
+            });
+            if (this.draft.get('draft_id')) {
+                this.draft.fetch();
+            }
+
             // insert tagbar into the compose view
             this.tagbar = new J.Views.TagBarView({
                 $compose_id: this.$compose_id,
-                $draft_id: this.$draft_id
+                $draft_id: this.$draft_id,
+                draft: this.draft,
             });
 
             this.$form.find('div.aoD.az6').after(this.tagbar.render().el);
 
             this.$compose_id.on('message:sent', this.handleSentMessage);
-
-            //$.ajax({
-                //type: 'GET',
-                //url: 'http://www.jdev.com/api/drafts/',
-                //beforeSend: function(xhrObject) {
-                    //xhrObject.setRequestHeader('Authorization', 'Token f0fcdbc930d4aac159b8f58fb0d54d9c19f4a435');
-                //},
-            //})
-                //.done(function(data) {
-                    //debugger;
-                    //console.log(data);
-                //})
-                //.fail(function(data) {
-                    //console.log(data.responseJSON.detail);
-                //});
 
         },
 
@@ -93,13 +98,13 @@
             if (!messageId) {
                 J.debug('messageId not found, compose_id:', this.$compose_id.val());
             } else {
-                postData = {
+                var message = new J.Models.MessageModel({
                     thread_id: messageId,
+                    draft_id: this.draft.id,
                     recipients: details.to.concat(details.cc).concat(details.bcc),
-                    tags: this.tagbar.tags.toJSON()
-                }
-                J.debug('jarvis message posted:', postData);
-                this.tagbar.tags.updateStorageId(messageId, 'message_id');
+                    tags: this.draft.tags.toJSON(),
+                });
+                message.save();
             }
         },
 

@@ -35,6 +35,11 @@
 
     });
 
+    // jarvis ajax setup
+    Jarvis.ajaxSetup('f0fcdbc930d4aac159b8f58fb0d54d9c19f4a435');
+    Jarvis.user_id = 1;
+    Jarvis.company_id = 1;
+
     // init router
     Jarvis.Routers.Main = new Jarvis.Routers.Workspace();
     Backbone.history.start();

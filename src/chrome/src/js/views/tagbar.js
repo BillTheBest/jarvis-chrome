@@ -15,22 +15,12 @@
         },
 
         initialize: function(options) {
+            _.bindAll(this, 'populateTagBar');
 
             this.$compose_id = options.$compose_id;
             this.$draft_id = options.$draft_id;
+            this.draft = options.draft;
             J.debug('adding tagbar for:', this.$compose_id.val());
-
-            // we only init this if we have a draft id,
-            // add listener to draft::save to instantiate the collection
-            // if we don't have a draft id, tags should be added to
-            // 'tags-to-sync' or something, these will be passed along with the
-            // draft id to J.Collections.DraftTags
-            this.tags = new J.Collections.Tags({
-                $compose_id: this.$compose_id,
-                $draft_id: this.$draft_id
-            });
-            this.tags.fetch();
-
         },
 
         render: function() {
@@ -47,12 +37,12 @@
                 afterTagAdded: this.handleTagAdded.bind(this),
                 afterTagRemoved: this.handleTagRemoved.bind(this)
             });
-            // add existing tags to tag-it
-            this.initializingTags = true;
-            this.tags.each(function(tagModel) {
-                this.$input.tagit('createTag', tagModel.get('name'));
-            }, this);
             this.initializingTags = false;
+            // add existing tags to tag-it
+            if (this.draft.tags.persistent) {
+                this.initializingTags = true;
+                this.draft.tags.fetch({success: this.populateTagBar});
+            }
             return this
         },
 
@@ -65,15 +55,39 @@
         },
 
         handleTagAdded: function(e, ui) {
-            if (!this.initializingTags) {
-                J.debug('adding tag:', ui.tagLabel);
-                this.tags.create({name: ui.tagLabel});
+            var tag = {
+                name: ui.tagLabel,
+                company: J.company_id,
+                draft: this.draft
+            };
+            J.debug('adding tag:', tag);
+            if (this.initializingTags) {
+                this.draft.tags.add(tag, {silent: true});
+            } else {
+                if (this.draft.tags.persistent) {
+                    this.draft.tags.create(tag);
+                } else {
+                    this.draft.tags.add(tag);
+                }
             }
         },
 
         handleTagRemoved: function(e, ui) {
             J.debug('removing tag:', ui.tagLabel);
-            this.tags.findWhere({name: ui.tagLabel}).destroy();
+            var tag = this.draft.tags.findWhere({name: ui.tagLabel});
+            if (this.draft.tags.persistent) {
+                tag.destroy();
+            } else {
+                this.draft.tags.remove(tag);
+            }
+        },
+
+        populateTagBar: function(collection, response, options) {
+            collection.each(function(tagModel) {
+                // XXX look into adding other attributes here like id somehow
+                this.$input.tagit('createTag', tagModel.get('name'));
+            }, this);
+            this.initializingTags = false;
         }
 
     });
