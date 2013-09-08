@@ -1,12 +1,17 @@
-(function($, J, _, Backbone) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'jarvis'
+], function($, _, Backbone, J) {
     'use strict';
 
-    J.namespace('Models.ThreadModel');
-
-    J.Models.ThreadModel = Backbone.Model.extend({
+    var ThreadModel = Backbone.Model.extend({
 
         urlRoot: J.THREADS_API_ENDPOINT
 
     });
 
-})(window.jQuery, window.Jarvis, window._, window.Backbone);
+    return ThreadModel;
+
+});

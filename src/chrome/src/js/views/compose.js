@@ -1,4 +1,12 @@
-(function($, J, _, Backbone) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'jarvis',
+    'models/draft',
+    'models/message',
+    'views/tagbar'
+], function($, _, Backbone, J) {
     'use strict';
 
     // everytime we detect a gmailr draft event, we want to save the draft of our tags/mentions
@@ -11,9 +19,7 @@
     //  - record tags when they're written in the body
     //  - record mentions when they're written in the body
 
-    J.namespace('Views.ComposeView');
-
-    J.Views.ComposeView = Backbone.View.extend({
+    var ComposeView = Backbone.View.extend({
 
         el: 'div.dw div.nH > div.nH > div.no div.AD',
 
@@ -47,7 +53,7 @@
                 draftId = null;
             }
 
-            this.draft = new J.Models.DraftModel({
+            this.draft = new DraftModel({
                 user: J.user_id,
                 draft_id: draftId,
             }, {
@@ -59,7 +65,7 @@
             }
 
             // insert tagbar into the compose view
-            this.tagbar = new J.Views.TagBarView({
+            this.tagbar = new TagBarView({
                 $compose_id: this.$compose_id,
                 $draft_id: this.$draft_id,
                 draft: this.draft,
@@ -98,7 +104,7 @@
             if (!messageId) {
                 J.debug('messageId not found, compose_id:', this.$compose_id.val());
             } else {
-                var message = new J.Models.MessageModel({
+                var message = new MessageModel({
                     thread_id: messageId,
                     draft_id: this.draft.id,
                     recipients: details.to.concat(details.cc).concat(details.bcc),
@@ -127,4 +133,7 @@
         }
 
     });
-})(window.jQuery, window.Jarvis, window._, window.Backbone);
+
+    return ComposeView;
+
+});

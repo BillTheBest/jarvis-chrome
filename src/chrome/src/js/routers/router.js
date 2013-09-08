@@ -1,9 +1,13 @@
-(function($, J, _, Backbone) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'jarvis',
+    'views/thread'
+], function($, _, Backbone, J, ThreadView) {
     'use strict';
 
-    J.namespace('Routers.Workspace');
-
-    J.Routers.Workspace = Backbone.Router.extend({
+    var Workspace = Backbone.Router.extend({
 
         routes: {
             'inbox/:message_id': 'messageView',
@@ -15,5 +19,14 @@
             J.debug('viewing message:', message_id);
             // want to pull tags for the given message id
         }
-    })
-})(window.jQuery, window.Jarvis, window._, window.Backbone);
+    });
+
+    var init = function() {
+        var workspace = new Workspace;
+        Backbone.history.start();
+    };
+
+    return {
+        init: init
+    }
+});

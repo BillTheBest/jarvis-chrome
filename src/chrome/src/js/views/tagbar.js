@@ -1,13 +1,18 @@
-(function($, J, _, Backbone) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'tag_it',
+    'jarvis'
+], function($, _, Backbone, J) {
     'use strict';
 
-    J.namespace('Views.TagBarView');
-
-    J.Views.TagBarView = Backbone.View.extend({
+    var TagBarView = Backbone.View.extend({
 
         tagName: 'div',
         className: 'aoD az6 tag-bar',
 
+        // XXX move out to template
         template: _.template('<input tabindex="1" class="aoT" placeholder="Tags" /></div>'),
 
         events: {
@@ -91,4 +96,7 @@
         }
 
     });
-})(window.jQuery, window.Jarvis, window._, window.Backbone);
+
+    return TagBarView;
+
+});

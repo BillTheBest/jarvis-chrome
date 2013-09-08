@@ -1,9 +1,13 @@
-(function($, J, _, Backbone) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'jarvis',
+    'collections/tags'
+], function($, _, Backbone, J) {
     'use strict';
 
-    J.namespace('Models.DraftModel');
-
-    J.Models.DraftModel = Backbone.Model.extend({
+    var = DraftModel = Backbone.Model.extend({
 
         urlRoot: J.DRAFTS_API_ENDPOINT,
 
@@ -21,7 +25,7 @@
             this.$compose_id = options.$compose_id;
             this.$draft_id = options.$draft_id;
 
-            this.tags = new J.Collections.Tags([], {
+            this.tags = new TagsCollection([], {
                 $compose_id: this.$compose_id,
                 $draft_id: this.$draft_id,
                 draft: this
@@ -36,6 +40,7 @@
         getJarvisDraftId: function() {
             var draft_id = this.get('draft_id');
             if (draft_id && typeof draft_id === 'string') {
+                // XXX draft should be able to handle hex value as well since js can't handle 64 bit
                 draft_id = parseInt(draft_id, 16);
             }
             return draft_id;
@@ -90,4 +95,6 @@
 
     });
 
-})(window.jQuery, window.Jarvis, window._, window.Backbone);
+    return DraftModel;
+
+});

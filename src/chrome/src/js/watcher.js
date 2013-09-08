@@ -1,24 +1,32 @@
-Jarvis.namespace('Watcher');
+define([
+    'jquery',
+    'underscore',
+    'jarvis'
+], function($, _, J) {
 
-Jarvis.Watcher = function(view) {
-    this._throttle     = 1000;
-    this._interval_id  = null;
-    this._view         = view;
-    return this;
-}
+    var Watcher = function(target) {
+        this._throttle    = 1000;
+        this._interval_id = null;
+        this._target      = target;
+        return this;
+    };
 
-/** will fire "_view" on "this._throttle" intervals. "_view" can be any gmail model? view? we want to watch.
- *
- * ie. compose view window, quick reply box etc.
- *
- */
+    // will want to have multiple watchers running at the same time?
+    Watcher.prototype.watch = function() {
+        J.debug('watching:', this._target);
+        this._interval_id = window.setInterval($.proxy(this._target.watch, this._target), this._throttle);
+    };
 
-// will want to have multiple watchers running at the same time?
-Jarvis.Watcher.prototype.watch = function() {
-    window.Jarvis.debug('watching:', this._view);
-    this._interval_id = window.setInterval($.proxy(this._view.watch, this._view), this._throttle);
-}
+    Watcher.prototype.halt = function() {
+        clearInterval(this._interval_id);
+    };
 
-Jarvis.Watcher.prototype.halt = function() {
-    clearInterval(this._interval_id);
-}
+    /** will fire "_target" on "this._throttle" intervals. "_view" can be any gmail model? view? we want to watch.
+     *
+     * ie. compose target window, quick reply box etc.
+     *
+     */
+
+    return Watcher;
+
+});

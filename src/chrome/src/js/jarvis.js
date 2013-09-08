@@ -2,17 +2,20 @@
  *
  * Will be used as the root namespace for all custom functions.
  */
-(function($, _) {
+define([
+    'jquery',
+    'underscore'
+], function($, _) {
 
     'use strict';
 
-    window.Jarvis = window.Jarvis || {}
+    var Jarvis = {};
 
     // private variables
     var debug_prefix = '[JARVIS_DEBUG]',
         base_api_url = 'http://www.jdev.com/api/';
 
-    $.extend(window.Jarvis, {
+    $.extend(Jarvis, {
 
         // public variables
         HASHTAG_KEY: 35,
@@ -35,21 +38,6 @@
             }
         },
 
-        namespace: function(ns) {
-            var parts = ns.split('.'),
-                currentNameSpace = this,
-                len = parts.length,
-                i;
-
-            for (i = 0, len; i < len; i++) {
-                if (!currentNameSpace[parts[i]]) {
-                    currentNameSpace[parts[i]] = {};
-                }
-                currentNameSpace = currentNameSpace[parts[i]];
-            }
-            return currentNameSpace;
-        },
-
         ajaxSetup: function(authToken) {
             $.ajaxSetup({
                 beforeSend: function(xhrObject) {
@@ -68,4 +56,7 @@
         }
 
     });
-})(window.jQuery, window._);
+
+    return Jarvis;
+
+});

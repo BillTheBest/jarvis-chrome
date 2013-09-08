@@ -1,9 +1,15 @@
-(function($, J, _, Backbone, window) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'jarvis',
+    'models/tag'
+], function($, _, Backbone, J) {
     'use strict';
 
-    J.namespace('Collections.Tags');
+    var TagsCollection = Backbone.Collection.extend({
 
-    J.Collections.Tags = Backbone.Collection.extend({
+        model: TagModel,
 
         url: function() {
             var url = J.DRAFTS_API_ENDPOINT;
@@ -23,9 +29,6 @@
             return response;
         },
 
-        // need to define a parse method to return draft tags
-        model: J.Models.TagModel,
-
         initialize: function(models, options) {
 
             this.$compose_id = options.$compose_id;
@@ -37,4 +40,6 @@
 
     });
 
-})(window.jQuery, window.Jarvis, window._, window.Backbone, window);
+    return TagsCollection;
+
+});

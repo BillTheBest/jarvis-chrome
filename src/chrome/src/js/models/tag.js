@@ -1,9 +1,12 @@
-(function($, J, _, Backbone) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'jarvis'
+], function($, _, Backbone, J) {
     'use strict';
 
-    J.namespace('Models.TagModel');
-
-    J.Models.TagModel = Backbone.Model.extend({
+    var TagModel = Backbone.Model.extend({
 
         defaults: {
             name: ''
@@ -32,4 +35,6 @@
 
     });
 
-})(window.jQuery, window.Jarvis, window._, window.Backbone);
+    return TagModel;
+
+});
