@@ -11,4 +11,6 @@ define([
 
     });
 
+    return MessageModel;
+
 });

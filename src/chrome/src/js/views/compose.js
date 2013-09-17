@@ -6,7 +6,7 @@ define([
     'models/draft',
     'models/message',
     'views/tagbar'
-], function($, _, Backbone, J) {
+], function($, _, Backbone, J, DraftModel, MessageModel, TagBarView) {
     'use strict';
 
     // everytime we detect a gmailr draft event, we want to save the draft of our tags/mentions
@@ -111,6 +111,7 @@ define([
                     tags: this.draft.tags.toJSON(),
                 });
                 message.save();
+                this.remove();
             }
         },
 

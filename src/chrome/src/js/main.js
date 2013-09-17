@@ -30,12 +30,12 @@ require.config({
         'underscore': {
             exports: '_'
         },
+        'tag_it': {
+            deps: ['jquery_ui'],
+        },
         'gmailr': {
             deps: ['jquery', 'jquery_bbq'],
             exports: 'Gmailr'
-        },
-        'tag_it': {
-            deps: ['jquery_ui'],
         },
         'jquery_ui': {
             deps: ['jquery'],

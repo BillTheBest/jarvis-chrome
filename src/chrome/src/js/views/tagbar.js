@@ -4,7 +4,7 @@ define([
     'backbone',
     'tag_it',
     'jarvis'
-], function($, _, Backbone, J) {
+], function($, _, Backbone, TagIt, J) {
     'use strict';
 
     var TagBarView = Backbone.View.extend({

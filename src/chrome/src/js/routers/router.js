@@ -3,30 +3,45 @@ define([
     'underscore',
     'backbone',
     'jarvis',
-    'views/thread'
+    'views/threads/thread'
 ], function($, _, Backbone, J, ThreadView) {
     'use strict';
 
-    var Workspace = Backbone.Router.extend({
+    var Router = Backbone.Router.extend({
 
-        routes: {
-            'inbox/:message_id': 'messageView',
-            'sent/:message_id': 'messageView'
+        initialize: function() {
+            _.bindAll(this, 'delayedView', '_loadView');
         },
 
-        messageView: function(message_id) {
-            debugger;
-            J.debug('viewing message:', message_id);
-            // want to pull tags for the given message id
+        routes: {
+            'inbox/:thread_id': 'threadView',
+            'sent/:thread_id': 'threadView'
+        },
+
+        threadView: function(thread_id) {
+            J.debug('viewing message:', thread_id);
+            this.delayedView(ThreadView, {thread_id: thread_id});
+        },
+
+        delayedView: function(view, options) {
+            // some view elements might not be present while gmail is loading.
+            // this lets us wait until the element is visible before initing
+            // the view.
+            // XXX some way to set a timeout on this
+            this.intervalId = window.setInterval(this._loadView, 1000, view, options);
+        },
+
+        _loadView: function(view, options) {
+            if (!$(view.prototype.el).is(':visible')) {
+                return;
+            }
+            J.debug('loading delayed view:', view);
+            window.clearInterval(this.intervalId);
+            new view(options);
         }
+
     });
 
-    var init = function() {
-        var workspace = new Workspace;
-        Backbone.history.start();
-    };
+    return Router;
 
-    return {
-        init: init
-    }
 });

@@ -1,8 +1,9 @@
 define([
     'jquery',
     'underscore',
-    'jarvis'
-], function($, _, J) {
+    'jarvis',
+    'views/compose'
+], function($, _, J, ComposeView) {
     /* WatcherView for the "Compose" view.
      *
      * Will watch the Gmail DOM for the a compose window to appear. When a compose
@@ -33,7 +34,7 @@ define([
                     var $compose_id = $(view).find(':input[name="composeid"]');
                     $(view).data('bound', true);
                     // want this view to be hidden and we want to append it to the DOM?
-                    new Jarvis.Views.ComposeView({$compose_id: $compose_id});
+                    new ComposeView({$compose_id: $compose_id});
                 }
             });
         }
@@ -50,7 +51,7 @@ define([
         // messages
             tagbarContent = '<div class="aoD az6"><input class="aoT" placeholder="Tags" /></div>';
 
-        window.Jarvis.debug('inserting elements after: ' + appendAfter);
+        J.debug('inserting elements after: ' + appendAfter);
         $(appendAfter).after(tagbarContent);
     };
 
@@ -60,12 +61,12 @@ define([
         $('div.' + this._additional_class).on('keypress', 'div.Am.Al.editable.LW-avf', function(event) {
 
             // handle hashtags
-            if (event.which === window.Jarvis.HASHTAG_KEY) {
-                window.Jarvis.debug('user is typing a reply with a hashtag');
+            if (event.which === J.HASHTAG_KEY) {
+                J.debug('user is typing a reply with a hashtag');
             }
 
-            if (event.which === window.Jarvis.MENTION_KEY) {
-                window.Jarvis.debug('user is typing a reply with a mention');
+            if (event.which === J.MENTION_KEY) {
+                J.debug('user is typing a reply with a mention');
             }
 
         });

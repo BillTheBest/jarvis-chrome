@@ -37,7 +37,8 @@
     "src/js/app.js",
     "src/js/jarvis.js",
     "src/js/watcher.js",
-    "src/js/collections/tags.js",
+    "src/js/collections/draft_tags.js",
+    "src/js/collections/thread_tags.js",
     "src/js/models/draft.js",
     "src/js/models/message.js",
     "src/js/models/tag.js",
@@ -45,8 +46,11 @@
     "src/js/targets/compose.js",
     "src/js/views/compose.js",
     "src/js/views/tagbar.js",
-    "src/js/views/thread.js",
-    "src/js/routers/router.js"
+    "src/js/views/threads/thread.js",
+    "src/js/views/threads/tag.js",
+    "src/js/routers/router.js",
+    "src/templates/threads/tag_item.html",
+    "src/templates/threads/tag_table.html"
   ],
   "manifest_version": 2,
   "permissions": [

@@ -3,11 +3,11 @@ define([
     'underscore',
     'backbone',
     'jarvis',
-    'collections/tags'
-], function($, _, Backbone, J) {
+    'collections/draft_tags'
+], function($, _, Backbone, J, DraftTagsCollection) {
     'use strict';
 
-    var = DraftModel = Backbone.Model.extend({
+    var DraftModel = Backbone.Model.extend({
 
         urlRoot: J.DRAFTS_API_ENDPOINT,
 
@@ -25,7 +25,7 @@ define([
             this.$compose_id = options.$compose_id;
             this.$draft_id = options.$draft_id;
 
-            this.tags = new TagsCollection([], {
+            this.tags = new DraftTagsCollection([], {
                 $compose_id: this.$compose_id,
                 $draft_id: this.$draft_id,
                 draft: this
