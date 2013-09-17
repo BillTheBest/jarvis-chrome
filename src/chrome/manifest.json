@@ -8,9 +8,8 @@
         "*://mail.google.com/*"
       ],
       "js": [
-        "lib/js/bower_components/requirejs/require.js",
-        "lib/js/vendor/require-cs.js",
-        "src/js/main.js"
+        "lib/js/vendor/gmailr/chrome/lib/yepnope.js/yepnope.js",
+        "src/js/bootstrap.js"
       ],
       "css": [
         "lib/stylesheets/smacss/main.css",
@@ -21,6 +20,8 @@
     }
   ],
   "web_accessible_resources": [
+    "lib/js/bower_components/requirejs/require.js",
+    "lib/js/vendor/require-cs.js",
     "lib/js/bower_components/requirejs-text/text.js",
     "lib/js/bower_components/jquery/jquery.min.js",
     "lib/js/bower_components/underscore/underscore-min.js",
@@ -30,6 +31,7 @@
     "lib/js/vendor/gmailr/chrome/lib/gmailr.js",
     "lib/js/vendor/gmailr/chrome/lib/jquery-bbq/jquery.ba-bbq.min.js",
     "lib/js/vendor/gmailui/lib/GMailUI.js",
+    "src/js/main.js",
     "src/js/app.js",
     "src/js/jarvis.js",
     "src/js/watcher.js",

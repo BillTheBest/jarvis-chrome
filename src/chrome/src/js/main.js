@@ -1,5 +1,15 @@
+scripts = document.getElementsByTagName('head')[0].getElementsByTagName('script');
+var baseURL = null;
+for(var i =0,l=scripts.length; i <l;i++) {
+    // fetch the chrome extension base url from the script we loaded
+    var matches = /(.*src\/js\/)main\.js$/.exec(scripts[i].src);
+    if(matches) {
+        baseURL = matches[1];
+        break;
+    }
+}
 require.config({
-    baseUrl: chrome.extension.getURL('src/js/'),
+    baseUrl: baseURL,
     paths: {
         jquery: '../../lib/js/bower_components/jquery/jquery.min',
         underscore: '../../lib/js/bower_components/underscore/underscore-min',
@@ -9,8 +19,8 @@ require.config({
         gmailr: '../../lib/js/vendor/gmailr/chrome/lib/gmailr',
         jquery_bbq: '../../lib/js/vendor/gmailr/chrome/lib/jquery-bbq/jquery.ba-bbq.min',
         gmailui: '../../lib/js/vendor/gmailui/lib/GMailUI',
-        text: '../../lib/js/bower_components/requirejs-text/text.js',
-        templates: 'templates'
+        text: '../../lib/js/bower_components/requirejs-text/text',
+        templates: '../templates'
     },
     shim: {
         'backbone': {
